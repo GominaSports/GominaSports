@@ -3,35 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Trasmisión en Vivo</title>
+    <title>Reproductor de Video en Vivo HLS (M3U8)</title>
     
     <link href="https://vjs.zencdn.net/8.6.1/video-js.css" rel="stylesheet" />
 </head>
 <body>
     
-    <video
-        id="live-stream-player"
-        class="video-js vjs-default-skin"
-        controls
-        preload="auto"
-        width="640"
-        height="360"
-        data-setup='{}'>
+    <div style="max-width: 800px; margin: 20px auto;">
+        <h1>Mi Transmisión en Vivo</h1>
         
-        <source src="https://multiplatform-f.akamaihd.net/i/multi/will/bunny/big_buck_bunny_,640x360_400,640x360_700,640x360_1000,950x540_1500,.f4v.csmil/master.m3u8" type="application/x-mpegURL">
-        
-        <p class="vjs-no-js">
-            Tu navegador no soporta video HTML5.
-        </p>
-    </video>
+        <video
+            id="live-stream-player"
+            class="video-js vjs-default-skin"
+            controls
+            preload="auto"
+            width="100%"
+            height="auto"
+            data-setup='{}'>
+            
+            <source src="https://cph-msl.akamaized.net/hls/live/2000341/test/master.m3u8" type="application/x-mpegURL">
+            
+            <p class="vjs-no-js">
+                Tu navegador no soporta video HTML5.
+            </p>
+        </video>
+    </div>
     
     <script src="https://vjs.zencdn.net/8.6.1/video.js"></script>
     
+    <script src="https://unpkg.com/@videojs/http-streaming@3.10.1/dist/videojs-http-streaming.min.js"></script>
+    
     <script>
-        // Inicialización y configuración para que el reproductor se adapte al amaño de la pantalla
+        // Inicialización y configuración para que el reproductor sea responsive
         var player = videojs('live-stream-player');
         player.on('ready', function() {
-            this.fluid(true); // Hace que el reproductor sea responsive
+            this.fluid(true); // Hace que el reproductor se adapte al tamaño del contenedor
+            console.log("Reproductor Video.js listo y configurado.");
         });
     </script>
 </body>
