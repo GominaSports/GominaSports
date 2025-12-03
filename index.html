@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reproductor de Video en Vivo HLS (M3U8)</title>
-    
     <link href="https://vjs.zencdn.net/8.6.1/video-js.css" rel="stylesheet" />
 </head>
 <body>
@@ -12,33 +8,22 @@
     <div style="max-width: 800px; margin: 20px auto;">
         <h1>Mi Transmisión en Vivo</h1>
         
-        <video
-            id="live-stream-player"
-            class="video-js vjs-default-skin"
-            controls
-            preload="auto"
-            width="100%"
-            height="auto"
-            data-setup='{}'>
+        <video id="live-stream-player" class="video-js vjs-default-skin" controls preload="auto" width="100%" height="auto" data-setup='{}'>
             
-            <source src="https://cph-msl.akamaized.net/hls/live/2000341/test/master.m3u8" type="application/x-mpegURL">
+            <source src="TU_ENLACE_M3U8_ACTIVO" type="application/x-mpegURL">
             
-            <p class="vjs-no-js">
-                Tu navegador no soporta video HTML5.
-            </p>
+            <p class="vjs-no-js">Tu navegador no soporta video HTML5.</p>
         </video>
     </div>
     
     <script src="https://vjs.zencdn.net/8.6.1/video.js"></script>
     
-    <script src="https://unpkg.com/@videojs/http-streaming@3.10.1/dist/videojs-http-streaming.min.js"></script>
+    <script src="https://unpkg.com/@videojs/http-streaming@3.x/dist/videojs-http-streaming.min.js"></script>
     
     <script>
-        // Inicialización y configuración para que el reproductor sea responsive
         var player = videojs('live-stream-player');
         player.on('ready', function() {
-            this.fluid(true); // Hace que el reproductor se adapte al tamaño del contenedor
-            console.log("Reproductor Video.js listo y configurado.");
+            this.fluid(true);
         });
     </script>
 </body>
