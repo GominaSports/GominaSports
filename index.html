@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Mi Stream</title>
+  <title>Prueba HLS</title>
   <style>
     body { background: #111; display: flex; justify-content: center; padding-top: 40px; }
     video { width: 80%; max-width: 900px; border: 3px solid white; border-radius: 10px; }
@@ -15,7 +15,7 @@
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <script>
   const video = document.getElementById('video');
-  const streamUrl = "https://gominasports.vasylmyroniv-var.workers.dev/";
+  const streamUrl = "https://gominasports.vasylmyroniv-var.workers.dev/";  // Reemplaza con tu Worker URL
 
   if (Hls.isSupported()) {
     const hls = new Hls();
