@@ -1,36 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <meta charset="utf-8">
-  <title>Prueba HLS</title>
-  <style>
-    body { background: #111; display: flex; justify-content: center; padding-top: 40px; }
-    video { width: 80%; max-width: 900px; border: 3px solid white; border-radius: 10px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Transmisión en Vivo</title>
+    
+    <link href="https://vjs.zencdn.net/8.6.1/video-js.css" rel="stylesheet" />
 </head>
 <body>
-
-<video id="video" controls autoplay></video>
-
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<script>
-  const video = document.getElementById('video');
-  const streamUrl = "https://test-streams.mux.dev/bbb-720p/index.m3u8"; // URL directa
-
-  if (Hls.isSupported()) {
-    const hls = new Hls();
-    hls.loadSource(streamUrl);
-    hls.attachMedia(video);
-    hls.on(Hls.Events.MANIFEST_PARSED, function() {
-      video.play();
-    });
-  } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-    video.src = streamUrl;
-    video.addEventListener('loadedmetadata', function() {
-      video.play();
-    });
-  }
-</script>
-
+    
+    <video
+        id="live-stream-player"
+        class="video-js vjs-default-skin"
+        controls
+        preload="auto"
+        width="640"
+        height="360"
+        data-setup='{}'>
+        
+        <source src="https://multiplatform-f.akamaihd.net/i/multi/will/bunny/big_buck_bunny_,640x360_400,640x360_700,640x360_1000,950x540_1500,.f4v.csmil/master.m3u8" type="application/x-mpegURL">
+        
+        <p class="vjs-no-js">
+            Tu navegador no soporta video HTML5.
+        </p>
+    </video>
+    
+    <script src="https://vjs.zencdn.net/8.6.1/video.js"></script>
+    
+    <script>
+        // Inicialización y configuración para que el reproductor se adapte al tamaño de la pantalla
+        var player = videojs('live-stream-player');
+        player.on('ready', function() {
+            this.fluid(true); // Hace que el reproductor sea responsive
+        });
+    </script>
 </body>
 </html>
