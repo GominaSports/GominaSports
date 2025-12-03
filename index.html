@@ -90,13 +90,26 @@
         <div class="selector-wrapper">
             <label for="stream-selector">Selecciona un Canal:</label>
             <select id="stream-selector">
+                
                 <option 
                     value="https://rmtv.akamaized.net/hls/live/2043153/rmtv-es-web/bitrate_3.m3u8" 
                     data-type="application/x-mpegURL">
-                    Real Madrid TV (Actual)
+                    Real Madrid TV (Canal 1)
                 </option>
                 
-                </select>
+                <option 
+                    value="http://portal.germanyservers.de:8000/live/1234/1234/26709.m3u8" 
+                    data-type="application/x-mpegURL">
+                    Canal de Deportes 2
+                </option>
+                
+                <option 
+                    value="http://185.228.155.93:8000/play/a03q/index.m3u8" 
+                    data-type="application/x-mpegURL">
+                    Canal de Prueba 3
+                </option>
+                
+            </select>
         </div>
         
         <div class="video-wrapper">
@@ -127,8 +140,8 @@
 
         // 3. Inicializa el reproductor con la opción seleccionada por defecto al cargar la página
         document.addEventListener('DOMContentLoaded', function() {
+            // Aseguramos que el primer canal se cargue al inicio
             var defaultOption = selector.options[selector.selectedIndex];
-            // Carga el streaming inicial
             loadStream(defaultOption.value, defaultOption.getAttribute('data-type'));
             player.fluid(true); // Hace que el video sea adaptable
         });
