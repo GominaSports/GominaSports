@@ -3,39 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GominaSports - Transmisión en Vivo con Desplegable</title>
+    <title>GominaSports - Transmisión en Vivo NEÓN</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
     
     <link href="https://vjs.zencdn.net/8.6.1/video-js.css" rel="stylesheet" />
     
     <style>
+        /* COLORES NEÓN */
+        :root {
+            --neon-color: #00ffcc; /* Cian brillante */
+            --neon-glow: 0 0 7px #00ffcc, 0 0 10px #00ffcc, 0 0 21px #00ffcc;
+            --bg-dark: #1a1a1a;
+            --card-dark: #2c2c2c;
+            --text-light: #f0f0f0;
+        }
+
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f2f5; 
-            color: #333;
+            background-color: var(--bg-dark); /* Fondo oscuro */
+            color: var(--text-light);
             margin: 0;
             padding: 0;
+            transition: background-color 0.5s;
         }
 
         .container {
             max-width: 850px; 
             margin: 40px auto;
             padding: 20px;
-            background-color: #ffffff;
+            background-color: var(--card-dark); /* Fondo de contenedor oscuro */
             border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), var(--neon-glow); /* Sombra con brillo neón */
+            border: 1px solid var(--neon-color);
         }
 
         .page-title {
             font-family: 'Poppins', sans-serif;
             font-size: 2.5em;
-            color: #ff4500;
+            color: var(--neon-color); /* Color neón */
             text-align: center;
             margin-bottom: 25px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-            letter-spacing: 2px;
-            border-bottom: 3px solid #ff4500;
+            text-shadow: var(--neon-glow); /* Efecto de resplandor neón */
+            letter-spacing: 3px;
+            border-bottom: 3px solid var(--neon-color);
             display: inline-block;
             padding-bottom: 5px;
         }
@@ -44,26 +55,50 @@
             text-align: center;
         }
 
+        /* 🌟 NUEVA ZONA DE BIENVENIDA 🌟 */
+        .welcome-zone {
+            padding: 15px;
+            margin-bottom: 30px;
+            background-color: rgba(0, 255, 204, 0.05); /* Fondo semitransparente neón */
+            border-left: 5px solid var(--neon-color);
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0, 255, 204, 0.5);
+        }
+
+        .welcome-zone p {
+            margin: 5px 0;
+            font-size: 0.95em;
+            line-height: 1.4;
+        }
+
+        .welcome-zone strong {
+            color: var(--neon-color);
+            text-shadow: 0 0 4px var(--neon-color);
+        }
+        /* ---------------------------------- */
+
         /* Estilos para el desplegable (Selector) */
         .selector-wrapper {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         #stream-selector {
-            padding: 10px 15px;
-            font-size: 1em;
-            border: 2px solid #ff4500;
-            border-radius: 6px;
-            background-color: #fff;
-            color: #333;
+            padding: 12px 20px;
+            font-size: 1.1em;
+            border: 2px solid var(--neon-color);
+            border-radius: 8px;
+            background-color: var(--bg-dark); /* Fondo del selector oscuro */
+            color: var(--neon-color); /* Texto neón */
+            box-shadow: var(--neon-glow);
             cursor: pointer;
             outline: none;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
         }
 
-        #stream-selector:hover {
-            border-color: #cc3700;
+        #stream-selector:hover, #stream-selector:focus {
+            border-color: #33ffff;
+            box-shadow: 0 0 10px #33ffff;
         }
 
         .video-wrapper {
@@ -71,12 +106,23 @@
             border-radius: 8px; 
             overflow: hidden; 
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            /* Importante para contener el iframe/video-js */
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio (450/800 = 0.5625) */
+            padding-bottom: 56.25%; 
             height: 0;
+            background-color: var(--bg-dark);
+            border: 2px dashed var(--neon-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 250px; 
         }
         
+        .video-placeholder {
+            color: var(--neon-color);
+            font-size: 1.5em;
+            text-shadow: var(--neon-glow);
+        }
+
         /* Estilos para que el iframe y el video.js sean responsivos */
         .video-wrapper iframe,
         .video-wrapper .video-js {
@@ -86,6 +132,8 @@
             width: 100%;
             height: 100%;
             border-radius: 8px;
+            width: 100%; 
+            height: 100%;
         }
 
     </style>
@@ -98,14 +146,19 @@
             <h1 class="page-title">GominaSports</h1>
         </div>
         
+        <div class="welcome-zone">
+            <p>¡Bienvenido a la zona de transmisiones en vivo!</p>
+            <p><strong>🚨 Aviso Importante:</strong> Debido a que algunas transmisiones se cargan desde fuentes externas (iframes), es **altamente recomendable** el uso de un **Bloqueador de Anuncios (Ad Blocker)** o navegadores como **Brave** para garantizar una experiencia sin interrupciones ni ventanas emergentes.</p>
+        </div>
         <div class="selector-wrapper">
             <label for="stream-selector">Selecciona un Canal:</label>
             <select id="stream-selector">
                 
+                <option value="" data-type="placeholder" selected disabled>--- Selecciona un canal ---</option> 
+                
                 <option 
                     value='<iframe src="https://bintv.pages.dev/?id=ofudrljocldrugudr295ifistlsw1w&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC9mcm9mdWRybGpvY2xkcnVndWRyMjk1aWZpc3Rsc3cxdw==" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
-                    data-type="iframe"
-                    selected>
+                    data-type="iframe">
                     Transmisión Especial (Canal 4)
                 </option>
                 
@@ -116,22 +169,23 @@
                 </option>
                 
                 <option 
-                    value="http://portal.germanyservers.de:8000/live/1234/1234/26709.m3u8" 
-                    data-type="application/x-mpegURL">
-                    Canal de Deportes 2
+                    value='<iframe frameborder=0 width=640 height=480 src="https://live.ugreen.autos/live/embed.php?ch=es4" allowfullscreen scrolling=no allowtransparency></iframe>' 
+                    data-type="iframe">
+                    Canal Alternativo 2 (ES4)
                 </option>
                 
                 <option 
-                    value="http://185.228.155.93:8000/play/a03q/index.m3u8" 
-                    data-type="application/x-mpegURL">
-                    Canal de Prueba 3
+                    value='<iframe frameborder=0 width=640 height=480 src="https://live.ugreen.autos/live/embed.php?ch=es15" allowfullscreen scrolling=no allowtransparency></iframe>' 
+                    data-type="iframe">
+                    Canal Alternativo 3 (ES15)
                 </option>
                 
             </select>
         </div>
         
         <div class="video-wrapper">
-            </div>
+            <p class="video-placeholder">Selecciona una transmisión para comenzar</p>
+        </div>
     </div>
     
     <script src="https://vjs.zencdn.net/8.6.1/video.js"></script>
@@ -154,32 +208,45 @@
          * Función para cargar el reproductor (iframe o Video.js)
          */
         function loadStream(content, type) {
+            // Si el tipo es 'placeholder', no hace nada, solo limpia
+            if (type === 'placeholder') {
+                videoWrapper.innerHTML = '<p class="video-placeholder">Selecciona una transmisión para comenzar</p>';
+                if (player) {
+                    player.dispose();
+                    player = null;
+                }
+                return; // 🛑 Detiene la función
+            }
+            
             // 1. Limpia el contenedor
             videoWrapper.innerHTML = '';
 
             if (type === 'iframe') {
-                // 2. Si es iframe, inserta el código HTML del iframe directamente
-                videoWrapper.innerHTML = content;
                 // Si Video.js estaba inicializado, destrúyelo
                 if (player) {
                     player.dispose();
                     player = null;
                 }
+                
+                // 2. Si es iframe, inserta el código HTML del iframe directamente
+                videoWrapper.innerHTML = content;
 
             } else {
                 // 3. Si es un enlace de video (HLS/m3u8), inserta la plantilla de Video.js
                 videoWrapper.innerHTML = videoJsTemplate;
 
-                // 4. Inicializa Video.js si no lo está (o después de reinsertar la plantilla)
+                // 4. Inicializa Video.js si no lo está
                 if (!player) {
-                    player = videojs('live-stream-player');
-                    player.fluid(true); // Hace que el video sea adaptable
+                    player = videojs('live-stream-player', { autoplay: true }); 
+                    player.fluid(true); 
+                } else {
+                    player.autoplay(true);
                 }
                 
                 // 5. Carga la fuente de Video.js
                 player.src({
-                    src: content, // content es la URL del stream
-                    type: type    // type es 'application/x-mpegURL'
+                    src: content, 
+                    type: type    
                 });
                 player.play(); // Intenta reproducir
             }
@@ -188,7 +255,7 @@
         // Obtiene el elemento desplegable
         const selector = document.getElementById('stream-selector');
 
-        // Inicializa el reproductor con la opción seleccionada por defecto al cargar la página
+        // Inicializa el marcador de posición al cargar la página
         document.addEventListener('DOMContentLoaded', function() {
             const defaultOption = selector.options[selector.selectedIndex];
             loadStream(defaultOption.value, defaultOption.getAttribute('data-type'));
@@ -197,8 +264,8 @@
         // Escucha el evento 'change' en el desplegable para cambiar el canal
         selector.addEventListener('change', function() {
             const selectedOption = this.options[this.selectedIndex];
-            const newContent = selectedOption.value; // Puede ser el iframe o la URL
-            const newType = selectedOption.getAttribute('data-type'); // Puede ser 'iframe' o 'application/x-mpegURL'
+            const newContent = selectedOption.value;
+            const newType = selectedOption.getAttribute('data-type');
             
             // Carga el nuevo contenido
             loadStream(newContent, newType);
