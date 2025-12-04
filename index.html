@@ -10,18 +10,18 @@
     <link href="https://vjs.zencdn.net/8.6.1/video-js.css" rel="stylesheet" />
     
     <style>
-        /* COLORES NEÓN */
+        /* COLORES NEÓN PASTEL (Rosa/Negro) */
         :root {
-            --neon-color: #00ffcc; /* Cian brillante */
-            --neon-glow: 0 0 7px #00ffcc, 0 0 10px #00ffcc, 0 0 21px #00ffcc;
-            --bg-dark: #1a1a1a;
-            --card-dark: #2c2c2c;
+            --neon-color: #ff69b4; /* Rosa Pastel Neón (Hot Pink) */
+            --neon-glow: 0 0 7px #ff69b4, 0 0 10px #ff69b4, 0 0 21px #ff69b4;
+            --bg-dark: #0a0a0a; /* Negro muy oscuro */
+            --card-dark: #1f1f1f; /* Gris casi negro */
             --text-light: #f0f0f0;
         }
 
         body {
             font-family: Arial, sans-serif;
-            background-color: var(--bg-dark); /* Fondo oscuro */
+            background-color: var(--bg-dark); 
             color: var(--text-light);
             margin: 0;
             padding: 0;
@@ -32,19 +32,19 @@
             max-width: 850px; 
             margin: 40px auto;
             padding: 20px;
-            background-color: var(--card-dark); /* Fondo de contenedor oscuro */
+            background-color: var(--card-dark); 
             border-radius: 12px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), var(--neon-glow); /* Sombra con brillo neón */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), var(--neon-glow); 
             border: 1px solid var(--neon-color);
         }
 
         .page-title {
             font-family: 'Poppins', sans-serif;
             font-size: 2.5em;
-            color: var(--neon-color); /* Color neón */
+            color: var(--neon-color); 
             text-align: center;
             margin-bottom: 25px;
-            text-shadow: var(--neon-glow); /* Efecto de resplandor neón */
+            text-shadow: var(--neon-glow); 
             letter-spacing: 3px;
             border-bottom: 3px solid var(--neon-color);
             display: inline-block;
@@ -55,14 +55,14 @@
             text-align: center;
         }
 
-        /* 🌟 NUEVA ZONA DE BIENVENIDA 🌟 */
+        /* ZONA DE BIENVENIDA */
         .welcome-zone {
             padding: 15px;
             margin-bottom: 30px;
-            background-color: rgba(0, 255, 204, 0.05); /* Fondo semitransparente neón */
+            background-color: rgba(255, 105, 180, 0.05); /* Fondo semitransparente rosa */
             border-left: 5px solid var(--neon-color);
             border-radius: 4px;
-            box-shadow: 0 0 5px rgba(0, 255, 204, 0.5);
+            box-shadow: 0 0 5px rgba(255, 105, 180, 0.5);
         }
 
         .welcome-zone p {
@@ -75,12 +75,11 @@
             color: var(--neon-color);
             text-shadow: 0 0 4px var(--neon-color);
         }
-        /* ---------------------------------- */
 
         /* Estilos para el desplegable (Selector) */
         .selector-wrapper {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 30px; 
         }
 
         #stream-selector {
@@ -88,7 +87,7 @@
             font-size: 1.1em;
             border: 2px solid var(--neon-color);
             border-radius: 8px;
-            background-color: var(--bg-dark); /* Fondo del selector oscuro */
+            background-color: var(--card-dark); /* Fondo del selector oscuro */
             color: var(--neon-color); /* Texto neón */
             box-shadow: var(--neon-glow);
             cursor: pointer;
@@ -96,9 +95,15 @@
             transition: all 0.3s;
         }
 
+        #stream-selector option {
+             /* Asegura que el texto en el desplegable sea legible */
+             background-color: var(--card-dark); 
+             color: var(--neon-color);
+        }
+
         #stream-selector:hover, #stream-selector:focus {
-            border-color: #33ffff;
-            box-shadow: 0 0 10px #33ffff;
+            border-color: #ff99cc;
+            box-shadow: 0 0 10px #ff99cc;
         }
 
         .video-wrapper {
@@ -150,6 +155,7 @@
             <p>¡Bienvenido a la zona de transmisiones en vivo!</p>
             <p><strong>🚨 Aviso Importante:</strong> Debido a que algunas transmisiones se cargan desde fuentes externas (iframes), es **altamente recomendable** el uso de un **Bloqueador de Anuncios (Ad Blocker)** o navegadores como **Brave** para garantizar una experiencia sin interrupciones ni ventanas emergentes.</p>
         </div>
+        
         <div class="selector-wrapper">
             <label for="stream-selector">Selecciona un Canal:</label>
             <select id="stream-selector">
@@ -159,7 +165,7 @@
                 <option 
                     value='<iframe src="https://bintv.pages.dev/?id=ofudrljocldrugudr295ifistlsw1w&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC9mcm9mdWRybGpvY2xkcnVndWRyMjk1aWZpc3Rsc3cxdw==" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
                     data-type="iframe">
-                    Transmisión Especial (Canal 4)
+                    TNT SPORTS 1
                 </option>
                 
                 <option 
@@ -169,15 +175,21 @@
                 </option>
                 
                 <option 
-                    value='<iframe frameborder=0 width=640 height=480 src="https://live.ugreen.autos/live/embed.php?ch=es4" allowfullscreen scrolling=no allowtransparency></iframe>' 
+                    value='<iframe src="https://bintv.pages.dev/?id=3a54634d0867b0c02ee3223292e7c6&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC9mYzNhNTQ2MzRkMDg2N2IwYzAyZWUzMjIzMjkyZTdjNg==" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
                     data-type="iframe">
-                    Canal Alternativo 2 (ES4)
+                    F1 24/7
                 </option>
                 
                 <option 
-                    value='<iframe frameborder=0 width=640 height=480 src="https://live.ugreen.autos/live/embed.php?ch=es15" allowfullscreen scrolling=no allowtransparency></iframe>' 
+                    value='<iframe src="https://bintv.pages.dev/?id=b0b886a6f5016d2d70c0d1fd307ab8&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC8wM2IwYjg4NmE2ZjUwMTZkMmQ3MGFiOA==" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
                     data-type="iframe">
-                    Canal Alternativo 3 (ES15)
+                    LaLigaTV
+                </option>
+                
+                <option 
+                    value='<iframe src="https://bintv.pages.dev/?id=f80fe360ea09758cda99ec2eb61fd2&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC8yOWY4MGZlMzYwZWEwOTc1OGNkYTk5ZWMyZWI2MWZkMg==" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                    data-type="iframe">
+                    DAZN1 US
                 </option>
                 
             </select>
