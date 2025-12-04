@@ -71,10 +71,21 @@
             border-radius: 8px; 
             overflow: hidden; 
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            /* Importante para contener el iframe/video-js */
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio (450/800 = 0.5625) */
+            height: 0;
         }
         
-        .video-js {
-            border-radius: 8px; 
+        /* Estilos para que el iframe y el video.js sean responsivos */
+        .video-wrapper iframe,
+        .video-wrapper .video-js {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
         }
 
     </style>
@@ -90,6 +101,13 @@
         <div class="selector-wrapper">
             <label for="stream-selector">Selecciona un Canal:</label>
             <select id="stream-selector">
+                
+                <option 
+                    value='<iframe src="https://bintv.pages.dev/?id=ofudrljocldrugudr295ifistlsw1w&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC9mcm9mdWRybGpvY2xkcnVndWRyMjk1aWZpc3Rsc3cxdw==" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                    data-type="iframe"
+                    selected>
+                    Transmisión Especial (Canal 4)
+                </option>
                 
                 <option 
                     value="https://rmtv.akamaized.net/hls/live/2043153/rmtv-es-web/bitrate_3.m3u8" 
@@ -113,47 +131,77 @@
         </div>
         
         <div class="video-wrapper">
-            <video id="live-stream-player" class="video-js vjs-default-skin" controls preload="auto" width="100%" height="auto" data-setup='{}'>
-                <p class="vjs-no-js">Tu navegador no soporta video HTML5.</p>
-            </video>
-        </div>
+            </div>
     </div>
     
     <script src="https://vjs.zencdn.net/8.6.1/video.js"></script>
     <script src="https://unpkg.com/@videojs/http-streaming@3.x/dist/videojs-http-streaming.min.js"></script>
     
     <script>
-        // 1. Inicializa el reproductor de Video.js
-        var player = videojs('live-stream-player');
+        // Contenedor donde se insertará el reproductor (Video.js o iframe)
+        const videoWrapper = document.querySelector('.video-wrapper');
+        // Variable global para la instancia de Video.js
+        let player = null;
         
-        // 2. Obtiene el elemento desplegable
-        var selector = document.getElementById('stream-selector');
+        // Plantilla para el reproductor Video.js
+        const videoJsTemplate = `
+            <video id="live-stream-player" class="video-js vjs-default-skin" controls preload="auto" width="100%" height="auto" data-setup='{}'>
+                <p class="vjs-no-js">Tu navegador no soporta video HTML5.</p>
+            </video>
+        `;
 
-        // Función para cargar la fuente de video
-        function loadStream(url, type) {
-            player.src({
-                src: url,
-                type: type
-            });
-            player.play(); // Intenta reproducir
+        /**
+         * Función para cargar el reproductor (iframe o Video.js)
+         */
+        function loadStream(content, type) {
+            // 1. Limpia el contenedor
+            videoWrapper.innerHTML = '';
+
+            if (type === 'iframe') {
+                // 2. Si es iframe, inserta el código HTML del iframe directamente
+                videoWrapper.innerHTML = content;
+                // Si Video.js estaba inicializado, destrúyelo
+                if (player) {
+                    player.dispose();
+                    player = null;
+                }
+
+            } else {
+                // 3. Si es un enlace de video (HLS/m3u8), inserta la plantilla de Video.js
+                videoWrapper.innerHTML = videoJsTemplate;
+
+                // 4. Inicializa Video.js si no lo está (o después de reinsertar la plantilla)
+                if (!player) {
+                    player = videojs('live-stream-player');
+                    player.fluid(true); // Hace que el video sea adaptable
+                }
+                
+                // 5. Carga la fuente de Video.js
+                player.src({
+                    src: content, // content es la URL del stream
+                    type: type    // type es 'application/x-mpegURL'
+                });
+                player.play(); // Intenta reproducir
+            }
         }
 
-        // 3. Inicializa el reproductor con la opción seleccionada por defecto al cargar la página
+        // Obtiene el elemento desplegable
+        const selector = document.getElementById('stream-selector');
+
+        // Inicializa el reproductor con la opción seleccionada por defecto al cargar la página
         document.addEventListener('DOMContentLoaded', function() {
-            // Aseguramos que el primer canal se cargue al inicio
-            var defaultOption = selector.options[selector.selectedIndex];
+            const defaultOption = selector.options[selector.selectedIndex];
             loadStream(defaultOption.value, defaultOption.getAttribute('data-type'));
-            player.fluid(true); // Hace que el video sea adaptable
         });
 
-        // 4. Escucha el evento 'change' en el desplegable para cambiar el canal
+        // Escucha el evento 'change' en el desplegable para cambiar el canal
         selector.addEventListener('change', function() {
-            var selectedOption = this.options[this.selectedIndex];
-            var newUrl = selectedOption.value;
-            var newType = selectedOption.getAttribute('data-type');
+            const selectedOption = this.options[this.selectedIndex];
+            const newContent = selectedOption.value; // Puede ser el iframe o la URL
+            const newType = selectedOption.getAttribute('data-type'); // Puede ser 'iframe' o 'application/x-mpegURL'
             
-            // Carga la nueva fuente y tipo de archivo
-            loadStream(newUrl, newType);
+            // Carga el nuevo contenido
+            loadStream(newContent, newType);
         });
 
     </script>
