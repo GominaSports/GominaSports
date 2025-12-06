@@ -1,294 +1,319 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GominaSports - Transmisión en Vivo NEÓN</title>
-    
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
-    
-        <link href="https://vjs.zencdn.net/8.6.1/video-js.css" rel="stylesheet" />
-    
-        <style>
-        /* COLORES NEÓN PASTEL (Rosa/Negro) */
-        :root {
-            --neon-color: #ff69b4; /* Rosa Pastel Neón (Hot Pink) */
-            --neon-glow: 0 0 7px #ff69b4, 0 0 10px #ff69b4, 0 0 21px #ff69b4;
-            --bg-dark: #0a0a0a; /* Negro muy oscuro */
-            --card-dark: #1f1f1f; /* Gris casi negro */
-            --text-light: #f0f0f0;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GominaSports - Transmisión en Vivo NEÓN</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    
+    <link href="https://vjs.zencdn.net/8.6.1/video-js.css" rel="stylesheet" />
+    
+    <style>
+    /* COLORES NEÓN PASTEL (Rosa/Negro) */
+    :root {
+        --neon-color: #ff69b4; /* Rosa Pastel Neón (Hot Pink) */
+        --neon-glow: 0 0 7px #ff69b4, 0 0 10px #ff69b4, 0 0 21px #ff69b4;
+        --bg-dark: #0a0a0a; /* Negro muy oscuro */
+        --card-dark: #1f1f1f; /* Gris casi negro */
+        --text-light: #f0f0f0;
+    }
 
-        body {
-            font-family: Arial, sans-serif;
-            background-color: var(--bg-dark); 
-            color: var(--text-light);
-            margin: 0;
-            padding: 0;
-            transition: background-color 0.5s;
-        }
+    body {
+        font-family: Arial, sans-serif;
+        background-color: var(--bg-dark); 
+        color: var(--text-light);
+        margin: 0;
+        padding: 0;
+        transition: background-color 0.5s;
+    }
 
-        .container {
-            max-width: 850px; 
-            margin: 40px auto;
-            padding: 20px;
-            background-color: var(--card-dark); 
-            border-radius: 12px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), var(--neon-glow); 
-            border: 1px solid var(--neon-color);
-        }
+    .container {
+        max-width: 95%; /* Ajuste para mejor adaptación */
+        margin: 20px auto; /* Menos margen en móvil */
+        padding: 15px;
+        background-color: var(--card-dark); 
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), var(--neon-glow); 
+        border: 1px solid var(--neon-color);
+    }
 
-        .page-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 2.5em;
-            color: var(--neon-color); 
-            text-align: center;
-            margin-bottom: 25px;
-            text-shadow: var(--neon-glow); 
-            letter-spacing: 3px;
-            border-bottom: 3px solid var(--neon-color);
-            display: inline-block;
-            padding-bottom: 5px;
-        }
-        
-        .title-wrapper {
-            text-align: center;
-        }
+    .page-title {
+        font-family: 'Poppins', sans-serif;
+        font-size: 2em; /* Reducción de tamaño */
+        color: var(--neon-color); 
+        text-align: center;
+        margin-bottom: 20px;
+        text-shadow: var(--neon-glow); 
+        letter-spacing: 2px; /* Reducción de espaciado */
+        border-bottom: 3px solid var(--neon-color);
+        display: inline-block;
+        padding-bottom: 5px;
+    }
+    
+    .title-wrapper {
+        text-align: center;
+    }
 
-        /* ZONA DE BIENVENIDA */
-        .welcome-zone {
-            padding: 15px;
-            margin-bottom: 30px;
-            background-color: rgba(255, 105, 180, 0.05); /* Fondo semitransparente rosa */
-            border-left: 5px solid var(--neon-color);
-            border-radius: 4px;
-            box-shadow: 0 0 5px rgba(255, 105, 180, 0.5);
-        }
+    /* ZONA DE BIENVENIDA */
+    .welcome-zone {
+        padding: 15px;
+        margin-bottom: 20px;
+        background-color: rgba(255, 105, 180, 0.05);
+        border-left: 5px solid var(--neon-color);
+        border-radius: 4px;
+        box-shadow: 0 0 5px rgba(255, 105, 180, 0.5);
+    }
 
-        .welcome-zone p {
-            margin: 5px 0;
-            font-size: 0.95em;
-            line-height: 1.4;
-        }
+    .welcome-zone p {
+        margin: 5px 0;
+        font-size: 0.9em; /* Reducción de fuente */
+        line-height: 1.4;
+    }
 
-        .welcome-zone strong {
-            color: var(--neon-color);
-            text-shadow: 0 0 4px var(--neon-color);
-        }
+    .welcome-zone strong {
+        color: var(--neon-color);
+        text-shadow: 0 0 4px var(--neon-color);
+    }
 
-        /* Estilos para el desplegable (Selector) */
-        .selector-wrapper {
-            text-align: center;
-            margin-bottom: 30px; 
-        }
+    /* Estilos para el desplegable (Selector) */
+    .selector-wrapper {
+        text-align: center;
+        margin-bottom: 20px; 
+    }
 
-        #stream-selector {
-            padding: 12px 20px;
-            font-size: 1.1em;
-            border: 2px solid var(--neon-color);
-            border-radius: 8px;
-            background-color: var(--card-dark); /* Fondo del selector oscuro */
-            color: var(--neon-color); /* Texto neón */
-            box-shadow: var(--neon-glow);
-            cursor: pointer;
-            outline: none;
-            transition: all 0.3s;
-        }
+    #stream-selector {
+        width: 90%; /* Ancho en móvil */
+        max-width: 350px; /* Límite para escritorio */
+        padding: 10px 15px;
+        font-size: 1em;
+        border: 2px solid var(--neon-color);
+        border-radius: 8px;
+        background-color: var(--card-dark);
+        color: var(--neon-color);
+        box-shadow: var(--neon-glow);
+        cursor: pointer;
+        outline: none;
+        transition: all 0.3s;
+    }
 
-        #stream-selector option {
-             /* Asegura que el texto en el desplegable sea legible */
-             background-color: var(--card-dark); 
-             color: var(--neon-color);
-        }
+    #stream-selector option {
+        /* Asegura que el texto en el desplegable sea legible */
+        background-color: var(--card-dark); 
+        color: var(--neon-color);
+    }
 
-        #stream-selector:hover, #stream-selector:focus {
-            border-color: #ff99cc;
-            box-shadow: 0 0 10px #ff99cc;
-        }
+    #stream-selector:hover, #stream-selector:focus {
+        border-color: #ff99cc;
+        box-shadow: 0 0 10px #ff99cc;
+    }
 
-        .video-wrapper {
-            margin-top: 20px;
-            border-radius: 8px; 
-            overflow: hidden; 
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            position: relative;
-            padding-bottom: 56.25%; 
-            height: 0;
-            background-color: var(--bg-dark);
-            border: 2px dashed var(--neon-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 250px; 
-        }
-        
-        .video-placeholder {
-            color: var(--neon-color);
-            font-size: 1.5em;
-            text-shadow: var(--neon-glow);
-        }
+    .video-wrapper {
+        margin-top: 15px;
+        border-radius: 8px; 
+        overflow: hidden; 
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        position: relative;
+        padding-bottom: 56.25%; 
+        height: 0;
+        background-color: var(--bg-dark);
+        border: 2px dashed var(--neon-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 200px; /* Reducción de altura mínima */
+    }
+    
+    .video-placeholder {
+        color: var(--neon-color);
+        font-size: 1.2em; /* Reducción de fuente */
+        text-shadow: var(--neon-glow);
+    }
 
-        /* Estilos para que el iframe y el video.js sean responsivos */
-        .video-wrapper iframe,
-        .video-wrapper .video-js {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 8px;
-            width: 100%; 
-            height: 100%;
-        }
+    /* Estilos para que el iframe y el video.js sean responsivos */
+    .video-wrapper iframe,
+    .video-wrapper .video-js {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+        width: 100%; 
+        height: 100%;
+    }
 
-    </style>
+    /* Optimización para tabletas y escritorio (ancho > 600px) */
+    @media (min-width: 600px) {
+        .container {
+            max-width: 850px; 
+            padding: 20px;
+            margin: 40px auto;
+        }
+
+        .page-title {
+            font-size: 2.5em;
+            margin-bottom: 25px;
+            letter-spacing: 3px;
+        }
+        
+        .welcome-zone p {
+            font-size: 0.95em;
+        }
+
+        .video-wrapper {
+            min-height: 250px;
+        }
+    }
+
+    </style>
 </head>
 <body>
-    
-    <div class="container">
-        
-        <div class="title-wrapper">
-            <h1 class="page-title">GominaSports</h1>
-        </div>
-        
-        <div class="welcome-zone">
-            <p>¡Bienvenido a la zona de transmisiones en vivo!</p>
-            <p><strong>🚨 Aviso Importante:</strong> Debido a que algunas transmisiones se cargan desde fuentes externas (iframes), es **altamente recomendable** el uso de un **Bloqueador de Anuncios (Ad Blocker)** o navegadores como **Brave** para garantizar una experiencia sin interrupciones ni ventanas emergentes.</p>
-        </div>
-        
-        <div class="selector-wrapper">
-            <label for="stream-selector">Selecciona un Canal:</label>
-            <select id="stream-selector">
-                
-                <option value="" data-type="placeholder" selected disabled>--- Selecciona un canal ---</option> 
-                
-                                <option 
-                    value='<iframe src="https://justembeds.xyz/embed/0970d92ab241bd80c4a14b5b625a2557" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
-                    data-type="iframe">
-                    PremierLeague
-                </option>
-                
-                <option 
-                    value='<iframe src="https://bintv.pages.dev/?id=ofudrljocldrugudr295ifistlsw1w&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC9mcm9mdWRybGpvY2xkcnVndWRyMjk1aWZpc3Rsc3cxdw==" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
-                    data-type="iframe">
-                    TNT SPORTS 1
-                </option>
-                
-                <option 
-                    value="https://rmtv.akamaized.net/hls/live/2043153/rmtv-es-web/bitrate_3.m3u8" 
-                    data-type="application/x-mpegURL">
-                    Real Madrid TV (Canal 1)
-                </option>
-                
-                <option 
-                    value='<iframe src="https://bintv.pages.dev/?id=3a54634d0867b0c02ee3223292e7c6&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC9mYzNhNTQ2MzRkMDg2N2IwYzAyZWUzMjIzMjkyZTdjNg==" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
-                    data-type="iframe">
-                    F1 24/7
-                </option>
-                
-                <option 
-                    value='<iframe src="https://bintv.pages.dev/?id=b0b886a6f5016d2d70c0d1fd307ab8&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC8wM2IwYjg4NmE2ZjUwMTZkMmQ3MGFiOA==" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
-                    data-type="iframe">
-                    LaLigaTV
-                </option>
-                
-                <option 
-                    value='<iframe src="https://bintv.pages.dev/?id=f80fe360ea09758cda99ec2eb61fd2&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC8yOWY4MGZlMzYwZWEwOTc1OGNkYTk5ZWMyZWI2MWZkMg==" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
-                    data-type="iframe">
-                    DAZN1 US
-                </option>
-                
-            </select>
-        </div>
-        
-        <div class="video-wrapper">
-            <p class="video-placeholder">Selecciona una transmisión para comenzar</p>
-        </div>
-    </div>
-    
-    <script src="https://vjs.zencdn.net/8.6.1/video.js"></script>
-    <script src="https://unpkg.com/@videojs/http-streaming@3.x/dist/videojs-http-streaming.min.js"></script>
-    
-    <script>
-        // Contenedor donde se insertará el reproductor (Video.js o iframe)
-        const videoWrapper = document.querySelector('.video-wrapper');
-        // Variable global para la instancia de Video.js
-        let player = null;
-        
-        // Plantilla para el reproductor Video.js
-        const videoJsTemplate = `
-            <video id="live-stream-player" class="video-js vjs-default-skin" controls preload="auto" width="100%" height="auto" data-setup='{}'>
-                <p class="vjs-no-js">Tu navegador no soporta video HTML5.</p>
-            </video>
-        `;
+    
+    <div class="container">
+        
+        <div class="title-wrapper">
+            <h1 class="page-title">GominaSports</h1>
+        </div>
+        
+        <div class="welcome-zone">
+            <p>¡Bienvenido a la zona de transmisiones en vivo!</p>
+            <p><strong>🚨 Aviso Importante:</strong> Debido a que algunas transmisiones se cargan desde fuentes externas (iframes), es **altamente recomendable** el uso de un **Bloqueador de Anuncios (Ad Blocker)** o navegadores como **Brave** para garantizar una experiencia sin interrupciones ni ventanas emergentes.</p>
+        </div>
+        
+        <div class="selector-wrapper">
+            <label for="stream-selector">Selecciona un Canal:</label>
+            <select id="stream-selector">
+                
+                <option value="" data-type="placeholder" selected disabled>--- Selecciona un canal ---</option> 
+                
+                <option 
+                    value='<iframe src="https://justembeds.xyz/embed/0970d92ab241bd80c4a14b5b625a2557" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                    data-type="iframe">
+                    PremierLeague
+                </option>
+                
+                <option 
+                    value='<iframe src="https://bintv.pages.dev/?id=ofudrljocldrugudr295ifistlsw1w&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC9mcm9mdWRybGpvY2xkcnVndWRyMjk1aWZpc3Rsc3cxdw==" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                    data-type="iframe">
+                    TNT SPORTS 1
+                </option>
+                
+                <option 
+                    value="https://rmtv.akamaized.net/hls/live/2043153/rmtv-es-web/bitrate_3.m3u8" 
+                    data-type="application/x-mpegURL">
+                    Real Madrid TV (Canal 1)
+                </option>
+                
+                <option 
+                    value='<iframe src="https://bintv.pages.dev/?id=3a54634d0867b0c02ee3223292e7c6&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC9mYzNhNTQ2MzRkMDg2N2IwYzAyZWUzMjIzMjkyZTdjNg==" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                    data-type="iframe">
+                    F1 24/7
+                </option>
+                
+                <option 
+                    value='<iframe src="https://bintv.pages.dev/?id=b0b886a6f5016d2d70c0d1fd307ab8&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC8wM2IwYjg4NmE2ZjUwMTZkMmQ3MGMwZDFmZDMwN2FiOA==" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                    data-type="iframe">
+                    LaLigaTV
+                </option>
+                
+                <option 
+                    value='<iframe src="https://bintv.pages.dev/?id=f80fe360ea09758cda99ec2eb61fd2&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC8yOWY4MGZlMzYwZWEwOTc1OGNkYTk5ZWMyZWI2MWZkMg==" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                    data-type="iframe">
+                    DAZN1 US
+                </option>
+                
+            </select>
+        </div>
+        
+        <div class="video-wrapper">
+            <p class="video-placeholder">Selecciona una transmisión para comenzar</p>
+        </div>
+    </div>
+    
+    <script src="https://vjs.zencdn.net/8.6.1/video.js"></script>
+    <script src="https://unpkg.com/@videojs/http-streaming@3.x/dist/videojs-http-streaming.min.js"></script>
+    
+    <script>
+        // Contenedor donde se insertará el reproductor (Video.js o iframe)
+        const videoWrapper = document.querySelector('.video-wrapper');
+        // Variable global para la instancia de Video.js
+        let player = null;
+        
+        // Plantilla para el reproductor Video.js
+        const videoJsTemplate = `
+            <video id="live-stream-player" class="video-js vjs-default-skin" controls preload="auto" width="100%" height="auto" data-setup='{}'>
+                <p class="vjs-no-js">Tu navegador no soporta video HTML5.</p>
+            </video>
+        `;
 
-        /**
-         * Función para cargar el reproductor (iframe o Video.js)
-         */
-        function loadStream(content, type) {
-            // Si el tipo es 'placeholder', no hace nada, solo limpia
-            if (type === 'placeholder') {
-                videoWrapper.innerHTML = '<p class="video-placeholder">Selecciona una transmisión para comenzar</p>';
-                if (player) {
-                    player.dispose();
-                    player = null;
-                }
-                return; // 🛑 Detiene la función
-            }
-            
-            // 1. Limpia el contenedor
-            videoWrapper.innerHTML = '';
+        /**
+         * Función para cargar el reproductor (iframe o Video.js)
+         */
+        function loadStream(content, type) {
+            // Si el tipo es 'placeholder', no hace nada, solo limpia
+            if (type === 'placeholder') {
+                videoWrapper.innerHTML = '<p class="video-placeholder">Selecciona una transmisión para comenzar</p>';
+                if (player) {
+                    player.dispose();
+                    player = null;
+                }
+                return; // 🛑 Detiene la función
+            }
+            
+            // 1. Limpia el contenedor
+            videoWrapper.innerHTML = '';
 
-            if (type === 'iframe') {
-                // Si Video.js estaba inicializado, destrúyelo
-                if (player) {
-                    player.dispose();
-                    player = null;
-                }
-                
-                // 2. Si es iframe, inserta el código HTML del iframe directamente
-                videoWrapper.innerHTML = content;
+            if (type === 'iframe') {
+                // Si Video.js estaba inicializado, destrúyelo
+                if (player) {
+                    player.dispose();
+                    player = null;
+                }
+                
+                // 2. Si es iframe, inserta el código HTML del iframe directamente
+                videoWrapper.innerHTML = content;
 
-            } else {
-                // 3. Si es un enlace de video (HLS/m3u8), inserta la plantilla de Video.js
-                videoWrapper.innerHTML = videoJsTemplate;
+            } else {
+                // 3. Si es un enlace de video (HLS/m3u8), inserta la plantilla de Video.js
+                videoWrapper.innerHTML = videoJsTemplate;
 
-                // 4. Inicializa Video.js si no lo está
-                if (!player) {
-                    player = videojs('live-stream-player', { autoplay: true }); 
-                    player.fluid(true); 
-                } else {
-                    player.autoplay(true);
-                }
-                
-                // 5. Carga la fuente de Video.js
-                player.src({
-                    src: content, 
-                    type: type    
-                });
-                player.play(); // Intenta reproducir
-            }
-        }
+                // 4. Inicializa Video.js si no lo está
+                if (!player) {
+                    player = videojs('live-stream-player', { autoplay: true }); 
+                    player.fluid(true); 
+                } else {
+                    player.autoplay(true);
+                }
+                
+                // 5. Carga la fuente de Video.js
+                player.src({
+                    src: content, 
+                    type: type    
+                });
+                player.play(); // Intenta reproducir
+            }
+        }
 
-        // Obtiene el elemento desplegable
-        const selector = document.getElementById('stream-selector');
+        // Obtiene el elemento desplegable
+        const selector = document.getElementById('stream-selector');
 
-        // Inicializa el marcador de posición al cargar la página
-        document.addEventListener('DOMContentLoaded', function() {
-            const defaultOption = selector.options[selector.selectedIndex];
-            loadStream(defaultOption.value, defaultOption.getAttribute('data-type'));
-        });
+        // Inicializa el marcador de posición al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            const defaultOption = selector.options[selector.selectedIndex];
+            loadStream(defaultOption.value, defaultOption.getAttribute('data-type'));
+        });
 
-        // Escucha el evento 'change' en el desplegable para cambiar el canal
-        selector.addEventListener('change', function() {
-            const selectedOption = this.options[this.selectedIndex];
-            const newContent = selectedOption.value;
-            const newType = selectedOption.getAttribute('data-type');
-            
-            // Carga el nuevo contenido
-            loadStream(newContent, newType);
-        });
+        // Escucha el evento 'change' en el desplegable para cambiar el canal
+        selector.addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            const newContent = selectedOption.value;
+            const newType = selectedOption.getAttribute('data-type');
+            
+            // Carga el nuevo contenido
+            loadStream(newContent, newType);
+        });
 
-    </script>
+    </script>
 </body>
 </html>
