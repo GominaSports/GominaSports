@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GominaSports - Transmisión en Vivo NEÓN</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&display=swap" rel="stylesheet">
     
     <link href="https://vjs.zencdn.net/8.6.1/video-js.css" rel="stylesheet" />
     
@@ -17,10 +17,11 @@
         --bg-dark: #0a0a0a; /* Negro muy oscuro */
         --card-dark: #1f1f1f; /* Gris casi negro */
         --text-light: #f0f0f0;
+        --warning-color: #ffd700; /* Oro/Amarillo para advertencias */
     }
 
     body {
-        font-family: Arial, sans-serif;
+        font-family: 'Poppins', sans-serif; /* Aplicando la fuente principal */
         background-color: var(--bg-dark); 
         color: var(--text-light);
         margin: 0;
@@ -29,8 +30,8 @@
     }
 
     .container {
-        max-width: 95%; /* Ajuste para mejor adaptación */
-        margin: 20px auto; /* Menos margen en móvil */
+        max-width: 95%; 
+        margin: 20px auto 0; 
         padding: 15px;
         background-color: var(--card-dark); 
         border-radius: 12px;
@@ -40,15 +41,17 @@
 
     .page-title {
         font-family: 'Poppins', sans-serif;
-        font-size: 2em; /* Reducción de tamaño */
+        font-size: 2.5em; 
+        font-weight: 900; 
         color: var(--neon-color); 
         text-align: center;
         margin-bottom: 20px;
         text-shadow: var(--neon-glow); 
-        letter-spacing: 2px; /* Reducción de espaciado */
-        border-bottom: 3px solid var(--neon-color);
+        letter-spacing: 3px; 
+        border-bottom: 4px solid var(--neon-color); 
         display: inline-block;
         padding-bottom: 5px;
+        text-transform: uppercase;
     }
     
     .title-wrapper {
@@ -65,15 +68,48 @@
         box-shadow: 0 0 5px rgba(255, 105, 180, 0.5);
     }
 
-    .welcome-zone p {
+    .welcome-zone p, .error-instructions p, .error-instructions div {
         margin: 5px 0;
-        font-size: 0.9em; /* Reducción de fuente */
-        line-height: 1.4;
+        font-size: 0.9em; 
+        line-height: 1.5;
+        font-weight: 700; 
     }
 
-    .welcome-zone strong {
+    .welcome-zone strong, .error-instructions strong {
         color: var(--neon-color);
         text-shadow: 0 0 4px var(--neon-color);
+    }
+
+    /* ZONA DE INSTRUCCIONES DE ERROR */
+    .error-instructions {
+        padding: 15px;
+        margin-bottom: 20px;
+        background-color: rgba(255, 215, 0, 0.05); /* Fondo amarillo sutil */
+        border-left: 5px solid var(--warning-color);
+        border-radius: 4px;
+        box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+    }
+    
+    .error-instructions strong {
+        color: var(--warning-color); /* Texto clave en amarillo neón */
+        text-shadow: 0 0 4px var(--warning-color);
+    }
+    
+    .error-instructions ul {
+        margin-top: 10px;
+        padding-left: 20px;
+        font-size: 0.9em;
+        list-style: disc;
+    }
+    .error-instructions li {
+        margin-bottom: 5px;
+    }
+    
+    /* Separador dentro del bloque de instrucciones */
+    .instruction-separator {
+        border-top: 1px dashed rgba(255, 215, 0, 0.3);
+        margin: 15px 0;
+        padding-top: 15px;
     }
 
     /* Estilos para el desplegable (Selector) */
@@ -83,10 +119,11 @@
     }
 
     #stream-selector {
-        width: 90%; /* Ancho en móvil */
-        max-width: 350px; /* Límite para escritorio */
-        padding: 10px 15px;
-        font-size: 1em;
+        width: 90%; 
+        max-width: 380px; 
+        padding: 12px 15px; 
+        font-size: 1.05em; 
+        font-weight: 700;
         border: 2px solid var(--neon-color);
         border-radius: 8px;
         background-color: var(--card-dark);
@@ -95,17 +132,26 @@
         cursor: pointer;
         outline: none;
         transition: all 0.3s;
+        text-transform: uppercase;
     }
 
     #stream-selector option {
-        /* Asegura que el texto en el desplegable sea legible */
         background-color: var(--card-dark); 
         color: var(--neon-color);
     }
 
-    #stream-selector:hover, #stream-selector:focus {
-        border-color: #ff99cc;
-        box-shadow: 0 0 10px #ff99cc;
+    /* Estilo del Aviso Legal (MOVIDO FUERA DEL CONTENEDOR) */
+    .disclaimer-outer {
+        max-width: 850px; 
+        margin: 20px auto 40px; 
+        padding: 10px;
+        text-align: center;
+        font-size: 0.8em;
+        color: #999999;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        border-top: 1px dashed rgba(255, 105, 180, 0.2); 
+        padding-top: 15px;
     }
 
     .video-wrapper {
@@ -121,12 +167,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        min-height: 200px; /* Reducción de altura mínima */
+        min-height: 200px; 
     }
     
     .video-placeholder {
         color: var(--neon-color);
-        font-size: 1.2em; /* Reducción de fuente */
+        font-size: 1.2em; 
         text-shadow: var(--neon-glow);
     }
 
@@ -147,22 +193,14 @@
     @media (min-width: 600px) {
         .container {
             max-width: 850px; 
-            padding: 20px;
-            margin: 40px auto;
+            padding: 25px;
+            margin: 40px auto 0; 
         }
 
         .page-title {
-            font-size: 2.5em;
-            margin-bottom: 25px;
-            letter-spacing: 3px;
-        }
-        
-        .welcome-zone p {
-            font-size: 0.95em;
-        }
-
-        .video-wrapper {
-            min-height: 250px;
+            font-size: 3em; 
+            margin-bottom: 30px;
+            letter-spacing: 4px;
         }
     }
 
@@ -181,6 +219,27 @@
             <p><strong>🚨 Aviso Importante:</strong> Debido a que algunas transmisiones se cargan desde fuentes externas (iframes), es **altamente recomendable** el uso de un **Bloqueador de Anuncios (Ad Blocker)** o navegadores como **Brave** para garantizar una experiencia sin interrupciones ni ventanas emergentes.</p>
         </div>
         
+        <div class="error-instructions">
+            
+            <p><strong>🛠 Solución para "Stream Error" en canales específicos:</strong></p>
+            <p>Si aparece el mensaje <strong>"Stream Error"</strong> en los siguientes canales, sigue estos pasos:</p>
+            <ul>
+                <li>**Hacer click en cualquier parte de la transmisión, evitando el cuadro de error.**</li>
+                <li>Hacer **click en Fullscreen** (pantalla completa).</li>
+                <li>Hacer **click en el botón Play** para que vuelva a funcionar y se quite el error.</li>
+            </ul>
+            <p>Esto aplica para: **DAZN 1**, **DAZN 2**, **DAZN LaLiga**, **Movistar LaLiga**, **LaLiga Hypermotion 1** y **LaLiga Hypermotion 2**.</p>
+            
+            <div class="instruction-separator">
+                <p><strong>⚠️ Si los canales fallan al intentar reproducirlos:</strong></p>
+                <p>Esto suele deberse a que se están **actualizando los enlaces**.</p>
+                <ul>
+                    <li>**Recarga la página** por completo y vuelve a intentarlo.</li>
+                    <li>Si sigue fallando después de recargar, **espera unos minutos**.</li>
+                    <li>Si el problema persiste después de **10 minutos**, por favor, avísanos.</li>
+                </ul>
+            </div>
+            </div>
         <div class="selector-wrapper">
             <label for="stream-selector">Selecciona un Canal:</label>
             <select id="stream-selector">
@@ -206,10 +265,11 @@
                 </option>
                 
                 <option 
-                    value="<iframe frameborder=0 width=800 height=450 src='https://live.ugreen.autos/live/embed.php?ch=es74' allowfullscreen scrolling=no allowtransparency></iframe>" 
+                    value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZnphR1FEbmhKcytkN29yTjJlKzJBMk5NNXYwcVJBN2RHYWhlWkRrYTdEUy8~" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
                     data-type="iframe">
-                    Canal de Prueba Temporal
+                    Movistar LaLiga
                 </option>
+                
                 <option 
                     value="https://rmtv.akamaized.net/hls/live/2043153/rmtv-es-web/bitrate_3.m3u8" 
                     data-type="application/x-mpegURL">
@@ -270,8 +330,10 @@
         <div class="video-wrapper">
             <p class="video-placeholder">Selecciona una transmisión para comenzar</p>
         </div>
+
+    </div> <div class="disclaimer-outer">
+        Esta página no alberga ni un enlace ni video propio, es todo de terceros.
     </div>
-    
     <script src="https://vjs.zencdn.net/8.6.1/video.js"></script>
     <script src="https://unpkg.com/@videojs/http-streaming@3.x/dist/videojs-http-streaming.min.js"></script>
     
