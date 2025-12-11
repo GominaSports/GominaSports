@@ -6,10 +6,11 @@
     <title>GominaSports - Transmisión en Vivo</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    
     <link href="https://vjs.zencdn.net/8.6.1/video-js.css" rel="stylesheet" />
     
     <style>
-    /* ... (Estilos CSS anteriores - Se mantienen igual) ... */
+    /* COLORES MINIMALISTAS Y ELEGANTES */
     :root {
         --primary-color: #2c3e50; /* Gris Azulado Oscuro (Soft Navy) */
         --accent-color: #f39c12; /* Naranja/Amarillo Oscuro (Oro Suave) */
@@ -36,7 +37,7 @@
         background-color: var(--card-bg); 
         border-radius: 8px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); 
-        border: 1px solid rgba(255, 255, 255, 0.1); 
+        border: 1px solid rgba(255, 255, 255, 0.1); /* Borde sutil */
     }
 
     .page-title {
@@ -57,21 +58,14 @@
         text-align: center;
     }
 
-    .welcome-zone, .error-instructions, .loading-message {
+    /* ZONA DE BIENVENIDA Y ERRORES (Estilo limpio) */
+    .welcome-zone, .error-instructions {
         padding: 15px;
         margin-bottom: 20px;
         border-radius: 4px;
         font-size: 0.9em;
         line-height: 1.6;
-    }
-    
-    .loading-message {
-        background-color: #34495e; /* Azul oscuro */
-        border-left: 5px solid #3498db; /* Azul claro */
-        color: var(--text-light);
-        text-align: center;
-        font-weight: 700;
-        display: none; /* Oculto por defecto */
+        font-weight: 400;
     }
 
     .welcome-zone {
@@ -104,6 +98,7 @@
         padding-top: 15px;
     }
 
+    /* Estilos para el desplegable (Selector) - Minimalista */
     .selector-wrapper {
         text-align: center;
         margin-bottom: 30px; 
@@ -130,6 +125,7 @@
         color: var(--text-light);
     }
     
+    /* Estilos para los grupos de opciones */
     #stream-selector optgroup {
         font-weight: 700;
         font-size: 1em;
@@ -143,7 +139,8 @@
         color: #ddd; 
         background-color: #2a2a2a;
     }
-    
+
+    /* Estilo del Aviso Legal */
     .disclaimer-outer {
         max-width: 850px; 
         margin: 20px auto 40px; 
@@ -179,6 +176,7 @@
         font-weight: 700;
     }
 
+    /* Estilos para que el iframe y el video.js sean responsivos */
     .video-wrapper iframe,
     .video-wrapper .video-js {
         position: absolute;
@@ -189,6 +187,7 @@
         border-radius: 6px;
     }
 
+    /* Optimización para tabletas y escritorio (ancho > 600px) */
     @media (min-width: 600px) {
         .container {
             max-width: 900px; 
@@ -219,6 +218,7 @@
         <div class="error-instructions">
             
             <p><strong>🛠 Solución para "Stream Error" en canales específicos:</strong></p>
+            <p>Si aparece el mensaje <strong>"Stream Error"</strong> en los siguientes canales, sigue estos pasos:</p>
             <ul>
                 <li>**Hacer click en cualquier parte de la transmisión, evitando el cuadro de error.**</li>
                 <li>Hacer **click en Fullscreen** (pantalla completa).</li>
@@ -228,18 +228,14 @@
             
             <div class="instruction-separator">
                 <p><strong>⚠️ Si los canales fallan al intentar reproducirlos:</strong></p>
+                <p>Esto suele deberse a que se están **actualizando los enlaces**.</p>
                 <ul>
                     <li>**Recarga la página** por completo y vuelve a intentarlo.</li>
                     <li>Si sigue fallando después de recargar, **espera unos minutos**.</li>
                     <li>Si el problema persiste después de **10 minutos**, por favor, avísanos.</li>
                 </ul>
             </div>
-            
-        </div>
-        <div id="loading-message" class="loading-message">
-            Cargando la lista de canales M3U (puede tardar unos segundos)...
-        </div>
-
+            </div>
         <div class="selector-wrapper">
             <label for="stream-selector">Selecciona un Canal:</label>
             <select id="stream-selector">
@@ -247,53 +243,154 @@
                 <option value="" data-type="placeholder" selected disabled>--- Selecciona un canal ---</option> 
                 
                 <optgroup label="🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League">
-                    <option value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZjVTeWhrZjRSSmh1Mjlkb1hwb3cwWTg9" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' data-type="iframe">DAZN 1 ES</option>
-                    <option value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZjlxaHdrb0ZzZytmcmVDUUcybGpQcEE9" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' data-type="iframe">DAZN 2 ES</option>
+                    <option 
+                        value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZjVTeWhrZjRSSmh1Mjlkb1hwb3cwWTg9" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        DAZN 1 ES
+                    </option>
+
+                    <option 
+                        value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZjlxaHdrb0ZzZytmcmVDUUcybGpQcEE9" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        DAZN 2 ES
+                    </option>
                 </optgroup>
 
                 <optgroup label="🏍️ MotoGP">
-                    <option value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZjVTeWhrZjRSSmh1Mjlkb1hwb3cwWTg9" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' data-type="iframe">DAZN 1 ES</option>
-                    <option value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZjlxaHdrb0ZzZytmcmVDUUcybGpQcEE9" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' data-type="iframe">DAZN 2 ES</option>
+                    <option 
+                        value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZjVTeWhrZjRSSmh1Mjlkb1hwb3cwWTg9" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        DAZN 1 ES
+                    </option>
+
+                    <option 
+                        value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZjlxaHdrb0ZzZytmcmVDUUcybGpQcEE9" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        DAZN 2 ES
+                    </option>
                 </optgroup>
 
                 <optgroup label="🇪🇸 LaLiga">
-                    <option value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZjhtUVFybGdaN3lXSHNlcnFMYUlmMFEzNExDWkY2WkVsRmE3VEE5Yk1WTC8~" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' data-type="iframe">DAZN LaLiga</option>
-                    <option value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZnphR1FEbmhKcytkN29yTjJlKzJBMk5NNXYwcVJBN2RHYWhlWkRrYTdEUy8~" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' data-type="iframe">Movistar LaLiga</option>
-                    <option value='<iframe src="https://bintv.pages.dev/?id=b0b886a6f5016d2d70c0d1fd307ab8&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC8wM2IwYjg4NmE2ZjUwMTZkMmQ3MGMwZDFmZDMwN2FiOA==" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' data-type="iframe">LaLigaTV</option>
+                    <option 
+                        value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZjhtUVFybGdaN3lXSHNlcnFMYUlmMFEzNExDWkY2WkVsRmE3VEE5Yk1WTC8~" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        DAZN LaLiga
+                    </option>
+                    
+                    <option 
+                        value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZnphR1FEbmhKcytkN29yTjJlKzJBMk5NNXYwcVJBN2RHYWhlWkRrYTdEUy8~" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        Movistar LaLiga
+                    </option>
+
+                    <option 
+                        value='<iframe src="https://bintv.pages.dev/?id=b0b886a6f5016d2d70c0d1fd307ab8&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC8wM2IwYjg4NmE2ZjUwMTZkMmQ3MGMwZDFmZDMwN2FiOA==" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        LaLigaTV
+                    </option>
                 </optgroup>
                 
                 <optgroup label="🇪🇸 LaLiga Hypermotion">
-                    <option value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZjhrMW1tdnFQTVg4K2xUSHl0aWhkbGxCZ3BnenZCUXZ6NkZUcjNXVW9NZzE~" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' data-type="iframe">LaLiga Hypermotion 1</option>
-                    <option value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZjhrMW1tdnFQTVg4K2xUSHl0aWhkbG0vOGJNb2JtSHp1NVJ4dEo1NjBtVjM~" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' data-type="iframe">LaLiga Hypermotion 2</option>
+                    <option 
+                        value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZjhrMW1tdnFQTVg4K2xUSHl0aWhkbGxCZ3BnenZCUXZ6NkZUcjNXVW9NZzE~" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        LaLiga Hypermotion 1
+                    </option>
+
+                    <option 
+                        value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZjhrMW1tdnFQTVg4K2xUSHl0aWhkbG0vOGJNb2JtSHp1NVJ4dEo1NjBtVjM~" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        LaLiga Hypermotion 2
+                    </option>
                 </optgroup>
 
                 <optgroup label="⭐ Champions, Europa y Conference League">
-                    <option value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZnhsVWRlUFMwQlhsM0wrd1NiaWdlbFZKQXVWeGpsOS9ENTVsVmhNeG9RVXY~" width="100%" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' data-type="iframe">M Liga de Campeones 1</option>
-                    <option value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZnhsVWRlUFMwQlhsM0wrd1NiaWdlbFZQRGRTVlBtckVnVFI3OUpCcUw5TVk~" width="100%" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' data-type="iframe">M Liga de Campeones 2</option>
-                    <option value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZnhsVWRlUFMwQlhsM0wrd1NiaWdlbFdTVXZPYWVKM0kwdTZub1JuampGUmo~" width="100%" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' data-type="iframe">M Liga de Campeones 3</option>
-                    <option value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZnhsVWRlUFMwQlhsM0wrd1NiaWdlbFU2NnNxMms3QnM1d2xUckRSZ1gxNzM~" width="100%" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' data-type="iframe">M Liga de Campeones 4</option>
-                    <option value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZnhsVWRlUFMwQlhsM0wrd1NiaWdlbFgrSW83aGk3Z1phQkxSMUVxc2Zhdy8~" width="100%" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' data-type="iframe">M Liga de Campeones 5</option>
-                    <option value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZnhsVWRlUFMwQlhsM0wrd1NiaWdlbFhGb2pPYW1ic0pKWE5QMWJuNEZYZU8~" width="100%" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' data-type="iframe">M Liga de Campeones 6</option>
-                    <option value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZnhsVWRlUFMwQlhsM0wrd1NiaWdlbFgrcktxR0lUNko5RTVUNTd1Zitudys~" width="100%" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' data-type="iframe">M Liga de Campeones 7</option>
-                    <option value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZnhsVWRlUFMwQlhsM0wrd1NiaWdlbFdKcUZreUZRLzMwdHBSWTlrZzhtNzg~" " width="100%" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' data-type="iframe">M Liga de Campeones 8</option>
-                    <option value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZnhsVWRlUFMwQlhsM0wrd1NiaWdlbFYzUWJMV0NiMEhvQk9qbks3M3ZKUXM~" width="100%" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' data-type="iframe">M Liga de Campeones 9</option>
-                    <option value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZnhsVWRlUFMwQlhsM0wrd1NiaWdlbFg0QWlFNnFCR3hub2Q2VXJqaUl5VzM~" width="100%" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' data-type="iframe">M Liga de Campeones 10</option>
+                    
+                    <option 
+                        value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZnhsVWRlUFMwQlhsM0wrd1NiaWdlbFZKQXVWeGpsOS9ENTVsVmhNeG9RVXY~" width="100%" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        M Liga de Campeones 1
+                    </option>
+                    
+                    <option 
+                        value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZnhsVWRlUFMwQlhsM0wrd1NiaWdlbFZQRGRTVlBtckVnVFI3OUpCcUw5TVk~" width="100%" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        M Liga de Campeones 2
+                    </option>
+
+                    <option 
+                        value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZnhsVWRlUFMwQlhsM0wrd1NiaWdlbFdTVXZPYWVKM0kwdTZub1JuampGUmo~" width="100%" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        M Liga de Campeones 3
+                    </option>
+
+                    <option 
+                        value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZnhsVWRlUFMwQlhsM0wrd1NiaWdlbFU2NnNxMms3QnM1d2xUckRSZ1gxNzM~" width="100%" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        M Liga de Campeones 4
+                    </option>
+
+                    <option 
+                        value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZnhsVWRlUFMwQlhsM0wrd1NiaWdlbFgrSW83aGk3Z1phQkxSMUVxc2Zhdy8~" width="100%" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        M Liga de Campeones 5
+                    </option>
+
+                    <option 
+                        value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZnhsVWRlUFMwQlhsM0wrd1NiaWdlbFhGb2pPYW1ic0pKWE5QMWJuNEZYZU8~" width="100%" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        M Liga de Campeones 6
+                    </option>
+
+                    <option 
+                        value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZnhsVWRlUFMwQlhsM0wrd1NiaWdlbFgrcktxR0lUNko5RTVUNTd1Zitudys~" width="100%" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        M Liga de Campeones 7
+                    </option>
+
+                    <option 
+                        value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZnhsVWRlUFMwQlhsM0wrd1NiaWdlbFdKcUZreUZRLzMwdHBSWTlrZzhtNzg~" width="100%" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        M Liga de Campeones 8
+                    </option>
+
+                    <option 
+                        value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZnhsVWRlUFMwQlhsM0wrd1NiaWdlbFYzUWJMV0NiMEhvQk9qbks3M3ZKUXM~" width="100%" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        M Liga de Campeones 9
+                    </option>
+
+                    <option 
+                        value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZnhsVWRlUFMwQlhsM0wrd1NiaWdlbFg0QWlFNnFCR3hub2Q2VXJqaUl5VzM~" width="100%" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        M Liga de Campeones 10
+                    </option>
+                    
                 </optgroup>
 
                 <optgroup label="🏎️ F1">
-                    <option value='<iframe src="https://bintv.pages.dev/?id=3a54634d0867b0c02ee3223292e7c6&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC9mYzNhNTQ2MzRkMDg2N2IwYzAyZWUzMjIzMjkyZTdjNg==" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' data-type="iframe">DAZN F1</option>
+                    <option 
+                        value='<iframe src="https://bintv.pages.dev/?id=3a54634d0867b0c02ee3223292e7c6&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC9mYzNhNTQ2MzRkMDg2N2IwYzAyZWUzMjIzMjkyZTdjNg==" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        DAZN F1
+                    </option>
                 </optgroup>
 
                 <optgroup label="🌎 Variado">
-                    <option value='<iframe src="https://bintv.pages.dev/?id=cb98f6ff304e742c65ec6a3b5d087f&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC80NWNiOThmNmZmMzA0ZTc0MmM2NWVjNmEzYjVkMDg3Zg==" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' data-type="iframe">ESPN DEPORTES</option>
+                    <option 
+                        value='<iframe src="https://bintv.pages.dev/?id=cb98f6ff304e742c65ec6a3b5d087f&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC80NWNiOThmNmZmMzA0ZTc0MmM2NWVjNmEzYjVkMDg3Zg==" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        ESPN DEPORTES
+                    </option>
                 </optgroup>
 
-                <optgroup label="⚙️ Otros Estables">
-                    <option value="https://rmtv.akamaized.net/hls/live/2043153/rmtv-es-web/bitrate_3.m3u8" data-type="application/x-mpegURL">Real Madrid TV (Canal 1)</option>
+                <optgroup label="⚙️ Otros">
+                    <option 
+                        value="https://rmtv.akamaized.net/hls/live/2043153/rmtv-es-web/bitrate_3.m3u8" 
+                        data-type="application/x-mpegURL">
+                        Real Madrid TV (Canal 1)
+                    </option>
                 </optgroup>
-                
-                <optgroup id="dynamic-playlist-group" label="✨ Playlist M3U (Cargando...)">
-                    </optgroup>
                 
             </select>
         </div>
@@ -305,24 +402,16 @@
     </div> <div class="disclaimer-outer">
         Esta página no alberga ni un enlace ni video propio, es todo de terceros.
     </div>
-    
     <script src="https://vjs.zencdn.net/8.6.1/video.js"></script>
     <script src="https://unpkg.com/@videojs/http-streaming@3.x/dist/videojs-http-streaming.min.js"></script>
     
     <script>
-        // URL de la playlist que quieres leer (debe ser la misma)
-        const PLAYLIST_URL = "http://trial.ifiesta.net/playlist/TV-20796720368071/277385143919/m3u_plus";
-        
-        // Proxy para evitar el bloqueo CORS del navegador
-        const CORS_PROXY = "https://corsproxy.io/?"; 
-        
+        // Contenedor donde se insertará el reproductor (Video.js o iframe)
         const videoWrapper = document.querySelector('.video-wrapper');
-        const selector = document.getElementById('stream-selector');
-        const dynamicGroup = document.getElementById('dynamic-playlist-group');
-        const loadingMessage = document.getElementById('loading-message');
-        
+        // Variable global para la instancia de Video.js
         let player = null;
         
+        // Plantilla para el reproductor Video.js
         const videoJsTemplate = `
             <video id="live-stream-player" class="video-js vjs-default-skin" controls preload="auto" width="100%" height="auto" data-setup='{}'>
                 <p class="vjs-no-js">Tu navegador no soporta video HTML5.</p>
@@ -333,122 +422,58 @@
          * Función para cargar el reproductor (iframe o Video.js)
          */
         function loadStream(content, type) {
+            // Si el tipo es 'placeholder', no hace nada, solo limpia
             if (type === 'placeholder') {
                 videoWrapper.innerHTML = '<p class="video-placeholder">Selecciona una transmisión para comenzar</p>';
                 if (player) {
                     player.dispose();
                     player = null;
                 }
-                return;
+                return; // 🛑 Detiene la función
             }
             
+            // 1. Limpia el contenedor
             videoWrapper.innerHTML = '';
 
             if (type === 'iframe') {
+                // Si Video.js estaba inicializado, destrúyelo
                 if (player) {
                     player.dispose();
                     player = null;
                 }
+                
+                // 2. Si es iframe, inserta el código HTML del iframe directamente
                 videoWrapper.innerHTML = content;
 
             } else {
-                if (player) {
-                    player.dispose(); 
-                    player = null;
-                }
-                
+                // 3. Si es un enlace de video (HLS/m3u8), inserta la plantilla de Video.js
                 videoWrapper.innerHTML = videoJsTemplate;
 
-                // Inicializa Video.js
-                player = videojs('live-stream-player', { autoplay: true }); 
-                player.fluid(true); 
+                // 4. Inicializa Video.js si no lo está
+                if (!player) {
+                    player = videojs('live-stream-player', { autoplay: true }); 
+                    player.fluid(true); 
+                } else {
+                    player.autoplay(true);
+                }
                 
+                // 5. Carga la fuente de Video.js
                 player.src({
                     src: content, 
                     type: type    
                 });
-                player.play(); 
+                player.play(); // Intenta reproducir
             }
         }
 
-        /**
-         * FUNCIÓN CLAVE: Descarga la playlist M3U y la parsea.
-         */
-        async function fetchAndParsePlaylist() {
-            loadingMessage.style.display = 'block'; // Muestra el mensaje de carga
-            dynamicGroup.label = "✨ Playlist M3U (Descargando...)";
-            
-            // 1. Construye la URL del proxy
-            const proxyUrl = CORS_PROXY + encodeURIComponent(PLAYLIST_URL);
+        // Obtiene el elemento desplegable
+        const selector = document.getElementById('stream-selector');
 
-            try {
-                // 2. Hace la petición al Proxy
-                const response = await fetch(proxyUrl);
-                if (!response.ok) {
-                    throw new Error(`Error HTTP: ${response.status}`);
-                }
-                
-                // 3. Obtiene el contenido como texto
-                const text = await response.text();
-                
-                const lines = text.split('\n');
-                let newOptions = [];
-                let currentTitle = "Canal Desconocido";
-
-                // 4. Parsea las líneas
-                for (let i = 0; i < lines.length; i++) {
-                    const line = lines[i].trim();
-
-                    if (line.startsWith('#EXTINF')) {
-                        // Extrae el título del canal (el texto después de la última coma)
-                        const titleMatch = line.match(/,(.*)$/);
-                        currentTitle = titleMatch ? titleMatch[1].trim() : "Canal Desconocido";
-                        
-                        // Busca si hay un grupo (opcional)
-                        const groupMatch = line.match(/group-title="([^"]+)"/);
-                        if (groupMatch) {
-                            currentTitle = `[${groupMatch[1]}] ${currentTitle}`;
-                        }
-
-                    } else if (line.startsWith('http') || line.startsWith('https')) {
-                        // Si la línea es una URL de streaming, la empareja con el título anterior
-                        const url = line;
-                        
-                        // Crea la nueva opción
-                        const option = document.createElement('option');
-                        option.value = url;
-                        option.setAttribute('data-type', 'application/x-mpegURL'); 
-                        option.textContent = currentTitle;
-                        newOptions.push(option);
-
-                        currentTitle = "Canal Desconocido"; // Resetea el título
-                    }
-                }
-                
-                // 5. Inserta las opciones en el grupo dinámico
-                if (newOptions.length > 0) {
-                    dynamicGroup.label = `✨ Playlist M3U (${newOptions.length} Canales)`;
-                    newOptions.forEach(option => dynamicGroup.appendChild(option));
-                } else {
-                    dynamicGroup.label = "❌ Playlist M3U (Vacía o Error)";
-                    const errorOption = document.createElement('option');
-                    errorOption.textContent = "No se encontraron canales válidos.";
-                    dynamicGroup.appendChild(errorOption);
-                }
-
-            } catch (error) {
-                console.error("Error al cargar o parsear la playlist M3U:", error);
-                dynamicGroup.label = "🚨 Error de Carga/Proxy";
-                const errorOption = document.createElement('option');
-                errorOption.textContent = `Fallo al cargar: ${error.message}`;
-                dynamicGroup.appendChild(errorOption);
-
-            } finally {
-                loadingMessage.style.display = 'none'; // Oculta el mensaje de carga
-            }
-        }
-
-        // --- Event Listeners y Inicialización ---
+        // Inicializa el marcador de posición al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            const defaultOption = selector.options[selector.selectedIndex];
+            loadStream(defaultOption.value, defaultOption.getAttribute('data-type'));
+        });
 
         // Escucha el evento 'change' en el desplegable para cambiar el canal
         selector.addEventListener('change', function() {
@@ -456,21 +481,10 @@
             const newContent = selectedOption.value;
             const newType = selectedOption.getAttribute('data-type');
             
-            // Si el valor es una URL o un iframe, carga el stream.
-            if (newContent.startsWith('http') || newContent.startsWith('<iframe')) {
-                loadStream(newContent, newType);
-            }
+            // Carga el nuevo contenido
+            loadStream(newContent, newType);
         });
 
-        // Inicialización: Llama a la función para leer la playlist
-        document.addEventListener('DOMContentLoaded', function() {
-            // Carga la lista dinámica de la playlist
-            fetchAndParsePlaylist();
-            
-            // Carga el marcador de posición inicial
-            const defaultOption = selector.options[selector.selectedIndex];
-            loadStream(defaultOption.value, defaultOption.getAttribute('data-type'));
-        });
     </script>
 </body>
 </html>
