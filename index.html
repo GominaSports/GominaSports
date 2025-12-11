@@ -3,25 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GominaSports - Transmisión en Vivo NEÓN</title>
+    <title>GominaSports - Transmisión en Vivo</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     
     <link href="https://vjs.zencdn.net/8.6.1/video-js.css" rel="stylesheet" />
     
     <style>
-    /* COLORES NEÓN PASTEL (Rosa/Negro) */
+    /* COLORES MINIMALISTAS Y ELEGANTES */
     :root {
-        --neon-color: #ff69b4; /* Rosa Pastel Neón (Hot Pink) */
-        --neon-glow: 0 0 7px #ff69b4, 0 0 10px #ff69b4, 0 0 21px #ff69b4;
-        --bg-dark: #0a0a0a; /* Negro muy oscuro */
-        --card-dark: #1f1f1f; /* Gris casi negro */
-        --text-light: #f0f0f0;
-        --warning-color: #ffd700; /* Oro/Amarillo para advertencias */
+        --primary-color: #2c3e50; /* Gris Azulado Oscuro (Soft Navy) */
+        --accent-color: #f39c12; /* Naranja/Amarillo Oscuro (Oro Suave) */
+        --bg-dark: #121212; /* Fondo casi negro */
+        --card-bg: #1e1e1e; /* Fondo de contenedor ligeramente más claro */
+        --text-light: #ecf0f1; /* Gris claro para texto principal */
+        --warning-bg: rgba(243, 156, 18, 0.1); /* Fondo de advertencia suave */
+        --warning-border: #f39c12;
     }
 
     body {
-        font-family: 'Poppins', sans-serif; /* Aplicando la fuente principal */
+        font-family: 'Poppins', sans-serif;
         background-color: var(--bg-dark); 
         color: var(--text-light);
         margin: 0;
@@ -31,24 +32,23 @@
 
     .container {
         max-width: 95%; 
-        margin: 20px auto 0; 
-        padding: 15px;
-        background-color: var(--card-dark); 
-        border-radius: 12px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), var(--neon-glow); 
-        border: 1px solid var(--neon-color);
+        margin: 40px auto 0; 
+        padding: 25px;
+        background-color: var(--card-bg); 
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); 
+        border: 1px solid rgba(255, 255, 255, 0.1); /* Borde sutil */
     }
 
     .page-title {
         font-family: 'Poppins', sans-serif;
         font-size: 2.5em; 
-        font-weight: 900; 
-        color: var(--neon-color); 
+        font-weight: 700; /* Menos negrita que antes */
+        color: var(--text-light); 
         text-align: center;
-        margin-bottom: 20px;
-        text-shadow: var(--neon-glow); 
-        letter-spacing: 3px; 
-        border-bottom: 4px solid var(--neon-color); 
+        margin-bottom: 30px;
+        letter-spacing: 1px;
+        border-bottom: 2px solid var(--accent-color); 
         display: inline-block;
         padding-bottom: 5px;
         text-transform: uppercase;
@@ -58,77 +58,62 @@
         text-align: center;
     }
 
-    /* ZONA DE BIENVENIDA */
-    .welcome-zone {
+    /* ZONA DE BIENVENIDA Y ERRORES (Estilo limpio) */
+    .welcome-zone, .error-instructions {
         padding: 15px;
         margin-bottom: 20px;
-        background-color: rgba(255, 105, 180, 0.05);
-        border-left: 5px solid var(--neon-color);
         border-radius: 4px;
-        box-shadow: 0 0 5px rgba(255, 105, 180, 0.5);
+        font-size: 0.9em;
+        line-height: 1.6;
+        font-weight: 400; /* Texto más ligero */
     }
 
-    .welcome-zone p, .error-instructions p, .error-instructions div {
-        margin: 5px 0;
-        font-size: 0.9em; 
-        line-height: 1.5;
-        font-weight: 700; 
+    .welcome-zone {
+        background-color: var(--primary-color); 
+        border-left: 5px solid var(--accent-color);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     }
 
     .welcome-zone strong, .error-instructions strong {
-        color: var(--neon-color);
-        text-shadow: 0 0 4px var(--neon-color);
+        color: var(--accent-color); 
+        font-weight: 700;
     }
 
-    /* ZONA DE INSTRUCCIONES DE ERROR */
     .error-instructions {
-        padding: 15px;
-        margin-bottom: 20px;
-        background-color: rgba(255, 215, 0, 0.05); /* Fondo amarillo sutil */
-        border-left: 5px solid var(--warning-color);
-        border-radius: 4px;
-        box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
-    }
-    
-    .error-instructions strong {
-        color: var(--warning-color); /* Texto clave en amarillo neón */
-        text-shadow: 0 0 4px var(--warning-color);
+        background-color: var(--warning-bg); 
+        border-left: 5px solid var(--warning-border);
+        color: var(--text-light);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     }
     
     .error-instructions ul {
         margin-top: 10px;
         padding-left: 20px;
-        font-size: 0.9em;
         list-style: disc;
     }
-    .error-instructions li {
-        margin-bottom: 5px;
-    }
     
-    /* Separador dentro del bloque de instrucciones */
     .instruction-separator {
-        border-top: 1px dashed rgba(255, 215, 0, 0.3);
+        border-top: 1px dashed rgba(243, 156, 18, 0.5);
         margin: 15px 0;
         padding-top: 15px;
     }
 
-    /* Estilos para el desplegable (Selector) */
+    /* Estilos para el desplegable (Selector) - Minimalista */
     .selector-wrapper {
         text-align: center;
-        margin-bottom: 20px; 
+        margin-bottom: 30px; 
     }
 
     #stream-selector {
         width: 90%; 
-        max-width: 380px; 
+        max-width: 450px; 
         padding: 12px 15px; 
-        font-size: 1.05em; 
+        font-size: 1.0em; 
         font-weight: 700;
-        border: 2px solid var(--neon-color);
-        border-radius: 8px;
-        background-color: var(--card-dark);
-        color: var(--neon-color);
-        box-shadow: var(--neon-glow);
+        border: 1px solid var(--accent-color);
+        border-radius: 6px;
+        background-color: var(--primary-color); /* Fondo oscuro profesional */
+        color: var(--text-light);
         cursor: pointer;
         outline: none;
         transition: all 0.3s;
@@ -136,34 +121,49 @@
     }
 
     #stream-selector option {
-        background-color: var(--card-dark); 
-        color: var(--neon-color);
+        background-color: var(--card-bg); 
+        color: var(--text-light);
+    }
+    
+    /* Estilos para los grupos de opciones */
+    #stream-selector optgroup {
+        font-weight: 700;
+        font-size: 1em;
+        color: var(--accent-color); /* Títulos de grupo en color de acento */
+        background-color: var(--card-bg);
+        padding: 5px 0;
     }
 
-    /* Estilo del Aviso Legal (MOVIDO FUERA DEL CONTENEDOR) */
+    #stream-selector optgroup option {
+        font-weight: 400;
+        color: #ddd; 
+        background-color: #2a2a2a; /* Fondo más oscuro para opciones */
+    }
+
+    /* Estilo del Aviso Legal */
     .disclaimer-outer {
         max-width: 850px; 
         margin: 20px auto 40px; 
         padding: 10px;
         text-align: center;
-        font-size: 0.8em;
-        color: #999999;
-        font-weight: 500;
+        font-size: 0.75em;
+        color: #7f8c8d; /* Gris muy sutil */
+        font-weight: 400;
         letter-spacing: 0.5px;
-        border-top: 1px dashed rgba(255, 105, 180, 0.2); 
+        border-top: 1px dashed rgba(236, 240, 241, 0.1); 
         padding-top: 15px;
     }
 
     .video-wrapper {
         margin-top: 15px;
-        border-radius: 8px; 
+        border-radius: 6px; 
         overflow: hidden; 
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         position: relative;
         padding-bottom: 56.25%; 
         height: 0;
         background-color: var(--bg-dark);
-        border: 2px dashed var(--neon-color);
+        border: 1px solid var(--primary-color); /* Borde simple */
         display: flex;
         justify-content: center;
         align-items: center;
@@ -171,9 +171,9 @@
     }
     
     .video-placeholder {
-        color: var(--neon-color);
-        font-size: 1.2em; 
-        text-shadow: var(--neon-glow);
+        color: var(--accent-color);
+        font-size: 1.1em; 
+        font-weight: 700;
     }
 
     /* Estilos para que el iframe y el video.js sean responsivos */
@@ -184,23 +184,19 @@
         left: 0;
         width: 100%;
         height: 100%;
-        border-radius: 8px;
-        width: 100%; 
-        height: 100%;
+        border-radius: 6px;
     }
 
     /* Optimización para tabletas y escritorio (ancho > 600px) */
     @media (min-width: 600px) {
         .container {
-            max-width: 850px; 
-            padding: 25px;
-            margin: 40px auto 0; 
+            max-width: 900px; 
+            padding: 35px;
         }
 
         .page-title {
             font-size: 3em; 
-            margin-bottom: 30px;
-            letter-spacing: 4px;
+            letter-spacing: 2px;
         }
     }
 
@@ -216,7 +212,7 @@
         
         <div class="welcome-zone">
             <p>¡Bienvenido a la zona de transmisiones en vivo!</p>
-            <p><strong>🚨 Aviso Importante:</strong> Debido a que algunas transmisiones se cargan desde fuentes externas (iframes), es **altamente recomendable** el uso de un **Bloqueador de Anuncios (Ad Blocker)** o navegadores como **Brave** para garantizar una experiencia sin interrupciones ni ventanas emergentes.</p>
+            <p><strong>🚨 Aviso Importante:</strong> Recomendamos el uso de un **Bloqueador de Anuncios (Ad Blocker)** o navegadores como **Brave** para garantizar una experiencia sin interrupciones, ya que las transmisiones se cargan desde fuentes externas (iframes).</p>
         </div>
         
         <div class="error-instructions">
@@ -246,83 +242,111 @@
                 
                 <option value="" data-type="placeholder" selected disabled>--- Selecciona un canal ---</option> 
                 
-                <option 
-                    value='<iframe src="https://justembeds.xyz/embed/0970d92ab241bd80c4a14b5b625a2557" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
-                    data-type="iframe">
-                    PremierLeague
-                </option>
-                
-                <option 
-                    value='<iframe src="https://bintv.pages.dev/?id=ofudrljocldrugudr295ifistlsw1w&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC9mcm9mdWRybGpvY2xkcnVndWRyMjk1aWZpc3Rsc3cxdw==" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
-                    data-type="iframe">
-                    TNT SPORTS 1
-                </option>
-                
-                <option 
-                    value='<iframe src="https://bintv.pages.dev/?id=cb98f6ff304e742c65ec6a3b5d087f&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC80NWNiOThmNmZmMzA0ZTc0MmM2NWVjNmEzYjVkMDg3Zg==" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
-                    data-type="iframe">
-                    ESPN DEPORTES
-                </option>
-                
-                <option 
-                    value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZnphR1FEbmhKcytkN29yTjJlKzJBMk5NNXYwcVJBN2RHYWhlWkRrYTdEUy8~" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
-                    data-type="iframe">
-                    Movistar LaLiga
-                </option>
-                
-                <option 
-                    value="https://rmtv.akamaized.net/hls/live/2043153/rmtv-es-web/bitrate_3.m3u8" 
-                    data-type="application/x-mpegURL">
-                    Real Madrid TV (Canal 1)
-                </option>
-                
-                <option 
-                    value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZjhtUVFybGdaN3lXSHNlcnFMYUlmMFEzNExDWkY2WkVsRmE3VEE5Yk1WTC8~" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
-                    data-type="iframe">
-                    DAZN LaLiga
-                </option>
-                
-                <option 
-                    value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZjhrMW1tdnFQTVg4K2xUSHl0aWhkbGxCZ3BnenZCUXZ6NkZUcjNXVW9NZzE~" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
-                    data-type="iframe">
-                    LaLiga Hypermotion 1
-                </option>
+                <optgroup label="🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League">
+                    <option 
+                        value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZjVTeWhrZjRSSmh1Mjlkb1hwb3cwWTg9" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        DAZN 1 ES
+                    </option>
 
-                <option 
-                    value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZjhrMW1tdnFQTVg4K2xUSHl0aWhkbG0vOGJNb2JtSHp1NVJ4dEo1NjBtVjM~" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
-                    data-type="iframe">
-                    LaLiga Hypermotion 2
-                </option>
-                
-                <option 
-                    value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZjVTeWhrZjRSSmh1Mjlkb1hwb3cwWTg9" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
-                    data-type="iframe">
-                    DAZN 1 ES
-                </option>
+                    <option 
+                        value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZjlxaHdrb0ZzZytmcmVDUUcybGpQcEE9" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        DAZN 2 ES
+                    </option>
+                </optgroup>
 
-                <option 
-                    value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZjlxaHdrb0ZzZytmcmVDUUcybGpQcEE9" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
-                    data-type="iframe">
-                    DAZN 2 ES
-                </option>
+                <optgroup label="🏍️ MotoGP">
+                    <option 
+                        value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZjVTeWhrZjRSSmh1Mjlkb1hwb3cwWTg9" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        DAZN 1 ES
+                    </option>
+
+                    <option 
+                        value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZjlxaHdrb0ZzZytmcmVDUUcybGpQcEE9" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        DAZN 2 ES
+                    </option>
+                </optgroup>
+
+                <optgroup label="🇪🇸 LaLiga">
+                    <option 
+                        value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZjhtUVFybGdaN3lXSHNlcnFMYUlmMFEzNExDWkY2WkVsRmE3VEE5Yk1WTC8~" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        DAZN LaLiga
+                    </option>
+                    
+                    <option 
+                        value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZnphR1FEbmhKcytkN29yTjJlKzJBMk5NNXYwcVJBN2RHYWhlWkRrYTdEUy8~" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        Movistar LaLiga
+                    </option>
+
+                    <option 
+                        value='<iframe src="https://bintv.pages.dev/?id=b0b886a6f5016d2d70c0d1fd307ab8&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC8wM2IwYjg4NmE2ZjUwMTZkMmQ3MGMwZDFmZDMwN2FiOA==" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        LaLigaTV
+                    </option>
+                </optgroup>
                 
-                <option 
-                    value='<iframe src="https://bintv.pages.dev/?id=3a54634d0867b0c02ee3223292e7c6&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC9mYzNhNTQ2MzRkMDg2N2IwYzAyZWUzMjIzMjkyZTdjNg==" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
-                    data-type="iframe">
-                    F1 24/7
-                </option>
-                
-                <option 
-                    value='<iframe src="https://bintv.pages.dev/?id=b0b886a6f5016d2d70c0d1fd307ab8&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC8wM2IwYjg4NmE2ZjUwMTZkMmQ3MGMwZDFmZDMwN2FiOA==" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
-                    data-type="iframe">
-                    LaLigaTV
-                </option>
-                
-                <option 
-                    value='<iframe src="https://bintv.pages.dev/?id=f80fe360ea09758cda99ec2eb61fd2&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC8yOWY4MGZlMzYwZWEwOTc1OGNkYTk5ZWMyZWI2MWZkMg==" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
-                    data-type="iframe">
-                    DAZN1 US
-                </option>
+                <optgroup label="🇪🇸 LaLiga Hypermotion">
+                    <option 
+                        value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZjhrMW1tdnFQTVg4K2xUSHl0aWhkbGxCZ3BnenZCUXZ6NkZUcjNXVW9NZzE~" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        LaLiga Hypermotion 1
+                    </option>
+
+                    <option 
+                        value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZjhrMW1tdnFQTVg4K2xUSHl0aWhkbG0vOGJNb2JtSHp1NVJ4dEo1NjBtVjM~" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        LaLiga Hypermotion 2
+                    </option>
+                </optgroup>
+
+                <optgroup label="⭐ Champions League">
+                    <option 
+                        value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZnhsVWRlUFMwQlhsM0wrd1NiaWdlbFZKQXVWeGpsOS9ENTVsVmhNeG9RVXY~" width="100%" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        M Liga de Campeones
+                    </option>
+                    
+                    <option 
+                        value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZnhsVWRlUFMwQlhsM0wrd1NiaWdlbFZQRGRTVlBtckVnVFI3OUpCcUw5TVk~" width="100%" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        M Liga de Campeones 2
+                    </option>
+                    
+                    <option 
+                        value='<iframe src="https://ntvstream.cx/embed?t=cEZxcDdEVEtaUE90NGFtWWo3UlYrZURJRHV1VmwzOUNtQTc2TE4wZVhoM1d5NGtqWHVGN0s1WXhWNm1QalJOeSt3YjRlU2NHRVpvRXV0NExON2JPZnhsVWRlUFMwQlhsM0wrd1NiaWdlbFU2NnNxMms3QnM1d2xUckRSZ1gxNzM~" width="100%" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        M Liga de Campeones 4
+                    </option>
+                </optgroup>
+
+                <optgroup label="🏎️ F1">
+                    <option 
+                        value='<iframe src="https://bintv.pages.dev/?id=3a54634d0867b0c02ee3223292e7c6&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC9mYzNhNTQ2MzRkMDg2N2IwYzAyZWUzMjIzMjkyZTdjNg==" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        DAZN F1
+                    </option>
+                </optgroup>
+
+                <optgroup label="🌎 Variado">
+                    <option 
+                        value='<iframe src="https://bintv.pages.dev/?id=cb98f6ff304e742c65ec6a3b5d087f&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC80NWNiOThmNmZmMzA0ZTc0MmM2NWVjNmEzYjVkMDg3Zg==" width="800" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' 
+                        data-type="iframe">
+                        ESPN DEPORTES
+                    </option>
+                </optgroup>
+
+                <optgroup label="⚙️ Otros">
+                    <option 
+                        value="https://rmtv.akamaized.net/hls/live/2043153/rmtv-es-web/bitrate_3.m3u8" 
+                        data-type="application/x-mpegURL">
+                        Real Madrid TV (Canal 1)
+                    </option>
+                </optgroup>
                 
             </select>
         </div>
